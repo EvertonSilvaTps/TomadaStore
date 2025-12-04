@@ -12,17 +12,13 @@ namespace TomadaStore.Models.Models
         public DateTime SaleDate { get; private set; }
         public decimal TotalPrice { get; private set; }
 
-        public Sale(Customer customer, List<Product> products, DateTime saleDate, decimal totalPrice)
+        public Sale(Customer customer, List<Product> products, decimal totalPrice)
         {
             Customer = customer;
             Products = products;
             SaleDate = DateTime.UtcNow;
             TotalPrice = totalPrice;
         }
-
-
-
-
 
     }
 }
