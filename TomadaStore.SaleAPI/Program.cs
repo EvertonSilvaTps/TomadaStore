@@ -17,11 +17,11 @@ builder.Services.AddScoped<ConnectionDB>();
 builder.Services.AddScoped<ISaleRepository, SaleRepository>();
 builder.Services.AddScoped<ISaleService, SaleService>();
 
-//builder.Services.AddHttpClient<ISaleService, SaleService>(client => client.BaseAddress = new Uri("https://localhost:5001/api/v1/Customer"));
-//builder.Services.AddHttpClient<ISaleService, SaleService>(client => client.BaseAddress = new Uri("https://localhost:6001/api/v1/Product"));
 
+// vai acessar a API da Uri informada, buscando o comando IHtppClientFactory com a menção "Customer"
 builder.Services.AddHttpClient("Customer", client => client.BaseAddress = new Uri("https://localhost:5001/api/v1/Customer"));
 
+// vai acessar a API da Uri informada, buscando o comando IHtppClientFactory com a menção "Product"
 builder.Services.AddHttpClient("Product", client => client.BaseAddress = new Uri("https://localhost:6001/api/v1/Product"));
 
 
