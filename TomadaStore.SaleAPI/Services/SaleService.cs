@@ -12,27 +12,56 @@ namespace TomadaStore.SaleAPI.Services
 
         private readonly ILogger<SaleService> _logger;
 
-        private readonly HttpClient _httpClientProduct;
+        private readonly IHttpClientFactory _httpClientFactory;
 
-        private readonly HttpClient _httpClientCustomer;
+        //private readonly HttpClient _httpClientProduct;
+        //private readonly HttpClient _httpClientCustomer;
 
-        public SaleService(ISaleRepository saleRepository, ILogger<SaleService> logger, HttpClient httpProduct, HttpClient httpCustomer)
+
+        // Builder with dependency injection (Interface Repository; ILogger; HttpClient of Product; and HttpClient of Customer)
+        public SaleService(ISaleRepository saleRepository, ILogger<SaleService> logger, IHttpClientFactory httpClientFactory)
         {
             _saleRepository = saleRepository;
             _logger = logger;
-            _httpClientProduct = httpProduct;
-            _httpClientCustomer = httpCustomer;
+            _httpClientFactory = httpClientFactory;
         }
 
-        public async Task CreateSaleAsync(int idCustomer, string idProduct, SaleRequestDTO saleDTO)
+
+
+        public async Task CreateSaleAsync(int idCustomer, List<string> idsProduct)
         {
             try
             {
-                var customer = await _httpClientCustomer.GetFromJsonAsync<CustomerResponseDTO>(idCustomer.ToString());
+                var httpClientCustomer = _httpClientFactory.CreateClient("Customer");
 
-                var product = await _httpClientProduct.GetFromJsonAsync<ProductResponseDTO>(idProduct);
 
-                await _saleRepository.CreateSaleAsync(customer, product, saleDTO);
+                // Dado Id informado, converte os dados no formato JSON pra objeto C# do type (<CustomerResponseDTO>) com base aos campos da class 
+                var customer = await httpClientCustomer.GetFromJsonAsync<CustomerResponseDTO>(idCustomer.ToString());
+
+                // Dado Id informado, converte os dados do formato JSON pra objeto C# do type (<ProductResponseDTO>) com base aos campos da class 
+                //var product = await _httpClientProduct.GetFromJsonAsync<ProductResponseDTO>(idsProduct);
+
+                var httpClientProduct = _httpClientFactory.CreateClient("Produtc");
+                var products = new List<ProductResponseDTO>(); // List of products of the ProductResponseDTO type
+
+                foreach (var idProduct in idsProduct)
+                {
+                    // instancia um objeto do type ProductResponseDTO pra cada id da lista de produts,
+                    // convertendo os dados do formato JSON pra objeto C# com base aos campos da class
+                    var product = await httpClientProduct.GetFromJsonAsync<ProductResponseDTO>(idProduct);
+
+                    // adiciona o product a lista de products do type List<ProductResponseDTO>
+                    products.Add(product);
+                }
+
+
+                // Se não existir o cliente do Id informado OU não haver nenhum produto na lista de produtos, a venda é encerrada
+                if ((customer is null) || (products.Any(p => p is null)))
+                    throw new Exception("Foi feita referencia de Ids inexistentes");
+
+
+                // Sale created
+                await _saleRepository.CreateSaleAsync(customer, products);
 
             }
             catch (Exception ex)
