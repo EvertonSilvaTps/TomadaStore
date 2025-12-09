@@ -1,8 +1,10 @@
 using TomadaStore.SaleAPI.Data;
 using TomadaStore.SaleAPI.Repositories;
 using TomadaStore.SaleAPI.Repositories.Interfaces;
-using TomadaStore.SaleAPI.Services;
-using TomadaStore.SaleAPI.Services.Interfaces;
+using TomadaStore.SaleAPI.Services.v1;
+using TomadaStore.SaleAPI.Services.v1.Interfaces;
+using TomadaStore.SaleAPI.Services.v2;
+using TomadaStore.SaleAPI.Services.v2.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +18,7 @@ builder.Services.AddScoped<ConnectionDB>();
 
 builder.Services.AddScoped<ISaleRepository, SaleRepository>();
 builder.Services.AddScoped<ISaleService, SaleService>();
+builder.Services.AddScoped<ISaleServiceV2, SaleServiceV2>();
 
 
 // vai acessar a API da Uri informada, buscando o comando IHtppClientFactory com a menção "Customer"

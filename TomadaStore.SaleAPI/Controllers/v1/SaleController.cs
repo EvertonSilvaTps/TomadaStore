@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using TomadaStore.SaleAPI.Services.Interfaces;
+using TomadaStore.SaleAPI.Services.v1.Interfaces;
 
 namespace TomadaStore.SaleAPI.Controllers.v1
 {

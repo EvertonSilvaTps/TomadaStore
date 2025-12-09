@@ -2,5 +2,6 @@
   <Project Path="TomadasSore.CustomerAPI/TomadasSore.CustomerAPI.csproj" />
   <Project Path="TomadaStore.ProductAPI/TomadaStore.ProductAPI.csproj" />
   <Project Path="TomadaStore.SaleAPI/TomadaStore.SaleAPI.csproj" />
+  <Project Path="TomadaStore.SaleConsumerAPI/TomadaStore.SaleConsumerAPI.csproj" Id="85e678ba-78da-41da-9282-671b4d8e84cf" />
   <Project Path="TomadaStore/TomadaStore.Models.csproj" />
 </Solution>

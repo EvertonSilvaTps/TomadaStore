@@ -2,17 +2,17 @@
 using TomadaStore.Models.DTOs.Product;
 using TomadaStore.Models.DTOs.Sale;
 using TomadaStore.SaleAPI.Repositories.Interfaces;
-using TomadaStore.SaleAPI.Services.Interfaces;
+using TomadaStore.SaleAPI.Services.v1.Interfaces;
 
-namespace TomadaStore.SaleAPI.Services
+namespace TomadaStore.SaleAPI.Services.v1
 {
     public class SaleService : ISaleService
     {
         private readonly ISaleRepository _saleRepository;
 
-        private readonly ILogger<SaleService> _logger;
+            private readonly ILogger<SaleService> _logger;
 
-        private readonly IHttpClientFactory _httpClientFactory;
+            private readonly IHttpClientFactory _httpClientFactory;
 
         //private readonly HttpClient _httpClientProduct;
         //private readonly HttpClient _httpClientCustomer;
@@ -25,7 +25,7 @@ namespace TomadaStore.SaleAPI.Services
             _logger = logger;
             _httpClientFactory = httpClientFactory;
         }
-
+            
 
 
         public async Task CreateSaleAsync(int idCustomer, List<string> idsProduct)
