@@ -45,7 +45,7 @@ namespace TomadaStore.ProductAPI.Services
         }
 
 
-        public async Task<ProductResponseDTO> GetProductByIdAsync(ObjectId id)
+        public async Task<ProductResponseDTO> GetProductByIdAsync(string id)
         {
             try
             {

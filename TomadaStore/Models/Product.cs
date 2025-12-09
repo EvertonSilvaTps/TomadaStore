@@ -1,5 +1,4 @@
 ﻿using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
 
 namespace TomadaStore.Models.Models
 {
@@ -21,11 +20,16 @@ namespace TomadaStore.Models.Models
 
         public Product(string id, string name, string description, decimal price, Category category)
         {
-            Id = ObjectId.Parse(id);
+            Id = new ObjectId(id);
             Name = name;
             Description = description;
             Price = price;
             Category = category;
         }
+
+        public Product() {}
+
+
+
     }
 }

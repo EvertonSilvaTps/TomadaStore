@@ -5,12 +5,12 @@ namespace TomadaStore.SaleAPI.Controllers.v2
 {
     [Route("api/v2/[controller]")]
     [ApiController]
-    public class SaleControllerV2 : ControllerBase
+    public class SaleController : ControllerBase
     {
-        private readonly ILogger _logger;
+        private readonly ILogger<SaleController> _logger;
         private readonly ISaleServiceV2 _saleService;
 
-        public SaleControllerV2(ILogger logger, ISaleServiceV2 saleService)
+        public SaleController(ILogger<SaleController> logger, ISaleServiceV2 saleService)
         {
             _logger = logger;
             _saleService = saleService;
@@ -32,14 +32,6 @@ namespace TomadaStore.SaleAPI.Controllers.v2
                 return Problem(ex.Message);
             }
         }
-
-
-
-
-
-
-
-
 
     }
 }

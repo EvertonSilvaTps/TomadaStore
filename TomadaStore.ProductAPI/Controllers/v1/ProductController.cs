@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using MongoDB.Bson;
-using TomadaStore.Models.DTOs.Customer;
+﻿using Microsoft.AspNetCore.Mvc;
 using TomadaStore.Models.DTOs.Product;
 using TomadaStore.ProductAPI.Services.Interfaces;
 
@@ -22,7 +19,7 @@ namespace TomadaStore.ProductAPI.Controllers.v1
 
 
         [HttpGet]
-        public async Task<ActionResult<List<ProductRequestDTO>>> GetAllProductsAsync()
+        public async Task<ActionResult<List<ProductResponseDTO>>> GetAllProductsAsync()
         {
             try
             {
@@ -55,7 +52,7 @@ namespace TomadaStore.ProductAPI.Controllers.v1
 
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<ProductResponseDTO>> GetCustomerByIdAsync(ObjectId id)
+        public async Task<IActionResult> GetCustomerByIdAsync(string id)
         {
             try
             {

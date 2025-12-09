@@ -8,8 +8,7 @@ namespace TomadaStore.Models.DTOs.Category
 {
     public class CategoryResponseDTO
     {
-        [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
+        [BsonElement("id")]
         public string Id { get; set; }
         [BsonElement("name")]
         public string Name { get; init; }

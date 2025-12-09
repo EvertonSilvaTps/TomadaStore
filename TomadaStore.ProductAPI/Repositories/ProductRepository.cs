@@ -12,14 +12,12 @@ namespace TomadaStore.ProductAPI.Repositories
     {
         private readonly ILogger<ProductRepository> _logger;
         private readonly IMongoCollection<Product> _mongoCollection;
-        private readonly ConnectionDB _connection;
 
         public ProductRepository(ILogger<ProductRepository> logger,
                                 ConnectionDB connection)
         {
             _logger = logger;
-            _connection = connection;
-            _mongoCollection = _connection.GetMongoCollection();
+            _mongoCollection = connection.GetMongoCollection();
         }
 
         public async Task CreateProductAsync(ProductRequestDTO productDTO)
@@ -33,7 +31,6 @@ namespace TomadaStore.ProductAPI.Repositories
                     productDTO.Price,
                     new Category
                     (
-                        productDTO.Category.ToString(),
                         productDTO.Category.Name,
                         productDTO.Category.Description
                     )
@@ -73,15 +70,13 @@ namespace TomadaStore.ProductAPI.Repositories
         }
 
 
-        public async Task<ProductResponseDTO> GetProductByIdAsync(ObjectId id)
+        public async Task<ProductResponseDTO> GetProductByIdAsync(string id)
         {
             try
             {
-                var filter = Builders<Product>.Filter.Eq(p => p.Id, id);
-                var product = await _mongoCollection.Find(filter).FirstOrDefaultAsync();
-                if (product == null)
-                    return null;
-                return new ProductResponseDTO
+                var product = await _mongoCollection.Find(p => p.Id == new ObjectId(id)).FirstOrDefaultAsync();
+
+                ProductResponseDTO productResponse = new()
                 {
                     Id = product.Id.ToString(),
                     Name = product.Name,
@@ -89,10 +84,13 @@ namespace TomadaStore.ProductAPI.Repositories
                     Price = product.Price,
                     Category = new CategoryResponseDTO
                     {
+                        Id = product.Category.Id.ToString(),
                         Name = product.Category.Name,
                         Description = product.Category.Description
                     }
                 };
+
+                return productResponse;
             }
             catch (Exception ex)
             {

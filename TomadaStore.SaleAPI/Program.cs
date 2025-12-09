@@ -22,10 +22,10 @@ builder.Services.AddScoped<ISaleServiceV2, SaleServiceV2>();
 
 
 // vai acessar a API da Uri informada, buscando o comando IHtppClientFactory com a menção "Customer"
-builder.Services.AddHttpClient("Customer", client => client.BaseAddress = new Uri("https://localhost:5001/api/v1/Customer"));
+builder.Services.AddHttpClient("Customer", client => client.BaseAddress = new Uri("https://localhost:5001/api/v1/Customer/"));
 
 // vai acessar a API da Uri informada, buscando o comando IHtppClientFactory com a menção "Product"
-builder.Services.AddHttpClient("Product", client => client.BaseAddress = new Uri("https://localhost:6001/api/v1/Product"));
+builder.Services.AddHttpClient("Product", client => client.BaseAddress = new Uri("https://localhost:6001/api/v1/Product/"));
 
 
 

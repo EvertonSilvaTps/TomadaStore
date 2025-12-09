@@ -1,7 +1,4 @@
 ﻿using MongoDB.Bson;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace TomadaStore.Models.Models
 {
@@ -11,13 +8,19 @@ namespace TomadaStore.Models.Models
         public string Name { get; private set; }
         public string Description { get; private set; }
 
-        public Category(string id, string name, string description)
+        public Category(string name, string description)
         {
-            Id = ObjectId.Parse(id);
             Name = name;
             Description = description;
         }
 
+        public Category(string id, string name, string description)
+        {
+            Id = new ObjectId(id);
+            Name = name;
+            Description = description;
+        }
 
+        public Category() { }
     }
 }

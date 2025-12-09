@@ -9,7 +9,7 @@ namespace TomadaStore.ProductAPI.Services.Interfaces
 
         Task<List<ProductResponseDTO>> GetAllProductsAsync();
 
-        Task<ProductResponseDTO> GetProductByIdAsync(ObjectId id);
+        Task<ProductResponseDTO> GetProductByIdAsync(string id);
 
         Task UpdateProductAsync(string id, ProductRequestDTO productDto);
 

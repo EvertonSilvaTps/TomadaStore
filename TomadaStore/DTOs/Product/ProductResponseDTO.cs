@@ -1,7 +1,6 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using TomadaStore.Models.DTOs.Category;
-using TomadaStore.Models.Models;
 
 namespace TomadaStore.Models.DTOs.Product
 {

@@ -105,15 +105,5 @@ namespace TomadaStore.SaleAPI.Services.v2
             }
         }
 
-
-
-
-
-
-
-
-
-
-
     }
 }
